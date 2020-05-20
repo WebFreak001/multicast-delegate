@@ -90,6 +90,69 @@ calling more delegates
 2
 ```
 
+Another simple example porting the following C# code:
+```cs
+using System;
+
+public class Program
+{
+	public delegate void SomeDelegate();
+
+	public static void Main()
+	{
+		void Foo() { Console.WriteLine("foo"); }
+		void Bar() { Console.WriteLine("bar"); }
+
+		SomeDelegate dg = Foo;
+		dg += Foo;
+		dg += Foo;
+		dg += Bar;
+		dg();
+
+		CallCB(dg);
+	}
+
+	public static void CallCB(SomeDelegate cb)
+	{
+		cb();
+	}
+}
+```
+
+is ported:
+```d
+import std.stdio;
+import multicast_delegate;
+
+alias SomeDelegate = void delegate();
+
+void main()
+{
+	void foo() { writeln("foo"); }
+	void bar() { writeln("bar"); }
+
+	Multicast!SomeDelegate dg = &foo;
+	dg ~= &foo;
+	dg ~= &foo;
+	dg ~= &bar;
+	dg();
+
+	callCB(dg);
+}
+
+void callCB(SomeDelegate cb)
+{
+	cb();
+}
+```
+
+If you want to use global functions (not delegates) you need to
+`import std.functional : toDelegate` and use `dg ~= toDelegate(&foo);`
+or you can define `SomeDelegate` as a `void function()`. However in this exact
+code the callCB function argument would break with that.
+
+Using class or struct members and lambdas works without issues.
+
 ## Documentation
 
 http://multicast-delegate.dpldocs.info

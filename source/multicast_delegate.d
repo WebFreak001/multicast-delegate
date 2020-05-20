@@ -294,7 +294,7 @@ struct MulticastImpl(Del, bool assertIfNull)
 			if (copyBit)
 				cast() _accessMask |= needsCopyBit;
 
-		if (!delegates.length)
+		if (!_delegates.length)
 		{
 			static if (assertIfNull)
 				assert(false, "Tried to call unassigned multicast delegate");
