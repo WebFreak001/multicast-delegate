@@ -1,0 +1,16 @@
+{
+	"name": "multicast-delegate",
+	"license": "public domain",
+	"description": "C-Sharp style MulticastDelegate, allows combining and calling multiple delegates into one",
+	"authors": ["webfreak"],
+	"copyright": "Copyright © 2020, webfeak",
+	"configurations": [
+		{
+			"name": "library"
+		},
+		{
+			"name": "cs-compat",
+			"versions": ["CSharpCompat"]
+		}
+	]
+}
