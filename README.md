@@ -155,4 +155,4 @@ Using class or struct members and lambdas works without issues.
 
 ## Documentation
 
-http://multicast-delegate.dpldocs.info
+[https://multicast-delegate.dpldocs.info](https://multicast-delegate.dpldocs.info)
